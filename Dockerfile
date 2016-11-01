@@ -11,6 +11,9 @@ ADD http://d3kbcqa49mib13.cloudfront.net/spark-2.0.1-bin-hadoop2.7.tgz /tmp
 RUN mkdir /spark \
  && tar -xvzf /tmp/spark-2.0.1-bin-hadoop2.7.tgz -C /spark --strip-components=1
 
+ENV SPARK_HOME /spark
+ENV PYTHONPATH $SPARK_HOME/python:$SPARK_HOME/python/lib/py4j-0.10.3-src.zip
+
 # Expose Spark Server
 EXPOSE 7077
 
