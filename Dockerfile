@@ -4,6 +4,8 @@ FROM produktion/jupyter-openjdk
 
 MAINTAINER Enproduktion <n@produktion.io>
 
+USER root
+
 ADD http://downloads.lightbend.com/scala/2.11.8/scala-2.11.8.deb /tmp
 RUN dpkg -i /tmp/scala-2.11.8.deb
 
@@ -13,9 +15,8 @@ RUN mkdir spark \
 
 WORKDIR /spark
 
-RUN useradd produktion
+USER $NB_USER
 
-USER produktion
 CMD ["/spark/bin/spark-class", "org.apache.spark.deploy.master.Master"]
 
 # Expose Spark Server
